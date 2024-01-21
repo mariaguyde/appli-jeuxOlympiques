@@ -1,21 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
-import { useEffect, useState } from "react";
 import 'react-native-url-polyfill/auto'
 import Home from './components/Home';
+import Test from './components/Test';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 export default function App() {
 
+  const Stack = createNativeStackNavigator();
   return (
-      <SafeAreaView>
-          <Home/>
-      </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Accueil" component={Home}/>
+        <Stack.Screen name="Test" component={Test}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  containerApp:{
-      paddingTop: 80,
-  }
-});
