@@ -1,0 +1,6 @@
+/.idea
+/dist
+/.expo 
+
+# Node
+/node_modules
