@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
 import { useEffect, useState } from "react";
-
 //import databaseConfig from './databaseConfig'; 
 import { createClient } from '@supabase/supabase-js'; 
 //import Header from './Header';
@@ -16,32 +15,11 @@ function Home() {
     }, []);
   
     async function getEpreuves() {
-      /*
-      const { data, errors, status } =  await supabase
-      .from('Epreuves')
-      .select('*'); 
-      //*/
-
-      /*
-      const { data, error,status } = await supabase.from('SitesCompetitions')
-      .select(`
-        id_sitecompetition,
-        nom__sitecompetition
-        Epreuves (nom_epreuve, debut_epreuve,fin_epreuve )
-      `);
-
-      //*/
-
-         
       const { data, errors, status } =  await supabase
       .from('Epreuves')
       .select('*, SitesCompetitions(*)'); 
       //*/
       //.gte('column', 'Greater than or equal to')
-
-      console.log('here our data trying to left join');
-
-      console.log(data);
       setEpreuves(data);
     }
 
