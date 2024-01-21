@@ -17,7 +17,10 @@ function Home() {
     async function getEpreuves() {
       const { data, errors, status } =  await supabase
       .from('Epreuves')
-      .select('*, SitesCompetitions(*)'); 
+      .select('*, SitesCompetitions(*)')
+      .order('debut_epreuve', { ascending: true })
+      .limit(1);
+
       //*/
       //.gte('column', 'Greater than or equal to')
       setEpreuves(data);
@@ -25,14 +28,18 @@ function Home() {
 
     return (
         <SafeAreaView>
-          <FlatList
-                  style={styles.listEpreuves}
-                  data={epreuves}
-                  renderItem={({item}) => <DisplayEpreuveItem epreuve={item}/>}
-                  keyExtractor={item => item.id}
-          />
-          <Text>Test 3</Text>
-        </SafeAreaView>
+          <View style={styles.listEpreuvesContainer}>
+            <FlatList
+                    style={styles.listEpreuves}
+                    data={epreuves}
+                    renderItem={({item}) => <DisplayEpreuveItem epreuve={item}/>}
+                    keyExtractor={item => item.id} 
+            />
+            <Text>Test 3</Text>
+            <Text  style={styles.btnVoirEpreuves}>Voir tous les épreuves</Text>
+        
+          </View>
+      </SafeAreaView>
           
     )
 }
@@ -40,8 +47,18 @@ function Home() {
 export default Home; 
 
 const styles = StyleSheet.create({
+  listEpreuvesContainer: {
+    backgroundColor:'#036fb7',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
   listEpreuves:{
-      paddingBottom: 10,
-      paddingTop: 50
+  },
+  btnVoirEpreuves: {
+    color:'#f5f5f5',
+    textAlign: 'right', 
+    fontWeight: 'bold'
   }
 });
