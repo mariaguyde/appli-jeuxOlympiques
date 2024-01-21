@@ -7,7 +7,7 @@ function DisplayEpreuveItem({epreuve}) {
   console.log('-----------------------');
   console.log(epreuve);
   console.log('-----------------------');
-  console.log(moment(epreuve.debut_epreuve).utc().format('DD-MM-YYYY'));
+  
   return (
       <View style={styles.containerEpreuves}>
         <Text style={styles.titreContainer}>Prochaine épreuve</Text>

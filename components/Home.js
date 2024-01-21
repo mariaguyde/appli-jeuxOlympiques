@@ -20,9 +20,6 @@ function Home() {
       .select('*, SitesCompetitions(*)')
       .order('debut_epreuve', { ascending: true })
       .limit(1);
-
-      //*/
-      //.gte('column', 'Greater than or equal to')
       setEpreuves(data);
     }
 
@@ -37,7 +34,6 @@ function Home() {
             />
             <Text>Test 3</Text>
             <Text  style={styles.btnVoirEpreuves}>Voir tous les épreuves</Text>
-        
           </View>
       </SafeAreaView>
           
