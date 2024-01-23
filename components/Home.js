@@ -1,15 +1,11 @@
 import React from 'react'
 import { StyleSheet, View, Text, SafeAreaView, FlatList, Button } from 'react-native';
 import { useEffect, useState } from "react";
-//import databaseConfig from './databaseConfig'; 
-import { createClient } from '@supabase/supabase-js'; 
-//import Test from './Test';
 import DisplayEpreuveItem from './DisplayEpreuveItem';
-
-const supabase = createClient("https://aqccddyuxofytfphhgoi.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxY2NkZHl1eG9meXRmcGhoZ29pIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMDIyNDI2MiwiZXhwIjoyMDE1ODAwMjYyfQ.4Gw-vzPfrcyW2kSBl54ObqHdN5_pIPASpnAczf4MLK4");
+import { createClient } from '@supabase/supabase-js'; 
+import { supabase } from '../lib/supabase'
 
 function Home({navigation}) {
-
     const [epreuves, setEpreuves] = useState([]);
     useEffect(() => {
       getEpreuves();
@@ -31,13 +27,15 @@ function Home({navigation}) {
                     style={styles.listEpreuves}
                     data={epreuves}
                     renderItem={({item}) => <DisplayEpreuveItem epreuve={item}/>}
-                    keyExtractor={item => item.id} 
+                    keyExtractor={(item) => {
+                      return item.id;
+                    }}
             />
-            <Text>Test 4</Text>
             <Button
                 title="Voir toutes les épreuves"
-                onPress={() => navigation.navigate('Test')}
+                onPress={() => navigation.navigate('Map')}
               />  
+            <Text>Test branch affichage map site : 1 </Text>
           </View>
       </SafeAreaView>
           
