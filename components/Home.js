@@ -23,20 +23,25 @@ function Home({navigation}) {
 
     return (
         <SafeAreaView>
-          <View style={styles.listEpreuvesContainer}>
-            <FlatList
-                    style={styles.listEpreuves}
-                    data={epreuves}
-                    renderItem={({item}) => <DisplayEpreuveItem epreuve={item}/>}
-                    keyExtractor={(item) => {
-                      return item.id;
-                    }}
-            />
-            <Button
-                style={styles.btnVoirEpreuves}
-                title="S'y rendre"
-                onPress={() => navigation.navigate('Map')}
-              />  
+          <View style={styles.homeContainer}>
+            <Text style={styles.titreContainer}>Prochaine épreuve</Text>
+            
+            <View style={styles.listEpreuvesContainer}>
+                <FlatList
+                        style={styles.listEpreuves}
+                        data={epreuves}
+                        renderItem={({item}) => <DisplayEpreuveItem epreuve={item}/>}
+                        keyExtractor={(item) => {
+                          return item.id;
+                        }}
+                />
+                <Button
+                  style={styles.btnVoirEpreuves}
+                  title="S'y rendre"
+                  onPress={() => navigation.navigate('Map')}
+                /> 
+            </View>
+ 
           </View>
       </SafeAreaView>
           
@@ -46,12 +51,21 @@ function Home({navigation}) {
 export default Home; 
 
 const styles = StyleSheet.create({
+  homeContainer: {
+    backgroundColor: colors.white,
+    padding: 20,
+    marginTop:30,
+    marginLeft:20,
+    marginRight:20,
+    border:"solid",
+    borderWidth: 1,
+    borderRadius:10,
+    borderColor: "transparent"
+  },
   listEpreuvesContainer: {
-    backgroundColor: colors.darkBlue,
-    paddingTop: 20,
-    paddingBottom: 20,
-    paddingLeft: 10,
-    paddingRight: 10,
+    //backgroundColor: colors.darkBlue,
+    marginTop: 10,
+
   },
   listEpreuves:{
   },
@@ -60,5 +74,11 @@ const styles = StyleSheet.create({
     color:'#f5f5f5',
     textAlign: 'right', 
     fontWeight: 'bold'
-  }
+  },
+  titreContainer:{
+    color: colors.black,
+    fontWeight: 'bold',
+    marginTop: 5,
+    fontSize: 16
+  }, 
 });

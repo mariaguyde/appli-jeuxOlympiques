@@ -7,10 +7,9 @@ function DisplayEpreuveItem({epreuve}) {
   console.log('-----------------------');
   console.log(epreuve);
   console.log('-----------------------');
-  
+
   return (
       <View style={styles.containerEpreuves}>
-        <Text style={styles.titreContainer}>Prochaine épreuve</Text>
         <View>
           <Text style={styles.textesContainer}>{epreuve.nom_epreuve}</Text>
           <Text style={styles.textesContainer}>{moment(epreuve.debut_epreuve).utc().format('HH:mm DD-MM-YYYY')} - {moment(epreuve.fin_epreuve).utc().format('HH:mm DD-MM-YYYY')}</Text>
@@ -24,13 +23,9 @@ export default DisplayEpreuveItem;
 
 const styles = StyleSheet.create({
   containerEpreuves:{
-      padding: 20,
-  }, 
-  titreContainer:{
-    color:'#f5f5f5',
-    fontWeight: 'bold'
+      marginBottom: 20,
   }, 
   textesContainer:{
-    color:'#f5f5f5',
+    //color:'#f5f5f5',
   }, 
 });
