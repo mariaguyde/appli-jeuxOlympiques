@@ -22,6 +22,11 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCaYvmYtlDk1ppZYF5UmMCfjIQKhPiZzuE"
+        }
+      },
       "package": "com.mariaguyde.applimobiliteJO2024"
     },
     "web": {

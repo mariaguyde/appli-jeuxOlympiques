@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { useEffect, useState } from "react";
 import MapView, { Marker, Polyline, Callout } from 'react-native-maps';
 import { supabase } from '../lib/supabase'
-
+import { PROVIDER_GOOGLE } from 'react-native-maps';
 
 function Map({navigation}) {
 
@@ -19,9 +19,14 @@ function Map({navigation}) {
         setCoordonneesSiteCompetitions(data);
     }
 
+    // Chercher la position du tel  // @react-native-get-location
+    // Faire l'itineraire entre la position du tel et le site de compet (avec Navidia)
+    
+    // provider = {PROVIDER_GOOGLE}
     return (
         <View style={styles.container}>
             <MapView
+                provider = {PROVIDER_GOOGLE}
                 style={styles.maps}
                 initialRegion={{
                 latitude: 48.864716,
