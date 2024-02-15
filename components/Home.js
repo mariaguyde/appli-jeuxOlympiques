@@ -5,6 +5,7 @@ import React from 'react'
 import { supabase } from '../lib/supabase'
 import { colors } from '../lib/constants'
 import DisplayEpreuveItem from './DisplayEpreuveItem';
+import axios from 'axios';
 
 function Home({navigation}) {
     const [epreuves, setEpreuves] = useState([]);
@@ -20,6 +21,35 @@ function Home({navigation}) {
       .limit(1);
       setEpreuves(data);
     }
+
+    const fetchDataNativia = async () => {
+      console.log('fetchData NATIVIA');
+        try {
+            // TODO à dynamiser 
+            const response = await axios.get(
+              "https://api.navitia.io/v1/journeys?from=2.39644%3B48.97042&to=2.3471693%3B48.8583252&"
+            , {
+              headers: {
+                  'Authorization': `aremplir`,
+              }
+            });
+            console.log(response);
+
+        } catch (err) {
+            console.log(err.response);
+            Alert.alert(
+                "Pas d'itinéraire",
+                "Aucun itinéraire n'a été trouvé",
+                [
+                    {
+                        text: "OK"
+                    }
+                ]
+            );
+        }
+    }
+
+    fetchDataNativia();
 
     return (
         <SafeAreaView>
