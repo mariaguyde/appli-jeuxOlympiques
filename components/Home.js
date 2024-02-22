@@ -27,25 +27,34 @@ function Home({navigation}) {
         try {
             // TODO à dynamiser 
             const response = await axios.get(
-              "https://api.navitia.io/v1/journeys?from=2.39644%3B48.97042&to=2.3471693%3B48.8583252&"
+              "https://api.navitia.io/v1/journeys?from=2.36066%3B48.84237&to=2.35475%3B48.88035&"
             , {
               headers: {
-                  'Authorization': `aremplir`,
+                  'Authorization': `69aa33e5-d8c5-4b2c-b571-63383a3915c7`,
               }
             });
-            console.log(response);
+            console.log(response.data.journeys[0].sections.length);
+
+            const itineraire = [];
+            
+            console.log("On va faire le chemin suivant : "); 
+            for (let i=0; i<response.data.journeys[0].sections.length; i++) {
+                //console.log(response.data.journeys[0].sections[i]);
+                let boutItineraire = response.data.journeys[0].sections[i]; 
+                itineraire[i] = {
+                  mode: boutItineraire.mode, 
+                  directionsLiterraire: boutItineraire.path, 
+                  pointDepart: boutItineraire.from, 
+                  pointArrivee: boutItineraire.to 
+                }
+                //console.log("- " + itineraire[i].pointDepart.name + " - " + itineraire[i].pointArrivee.name );
+
+
+                console.log("________________________________________________");
+            }
 
         } catch (err) {
             console.log(err.response);
-            Alert.alert(
-                "Pas d'itinéraire",
-                "Aucun itinéraire n'a été trouvé",
-                [
-                    {
-                        text: "OK"
-                    }
-                ]
-            );
         }
     }
 
