@@ -27,7 +27,7 @@ function Map({navigation}) {
         <View style={styles.container}>
             <MapView
                 provider = {PROVIDER_GOOGLE}
-                style={styles.maps}
+                style={{ height: 200, width:200 }}
                 initialRegion={{
                 latitude: 48.864716,
                 longitude: 2.349014,
@@ -46,6 +46,7 @@ function Map({navigation}) {
                     )
                  }
             </MapView>
+            <Text>Hello</Text>
         </View>
     );
 }
