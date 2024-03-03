@@ -22,8 +22,6 @@ function Home({navigation}) {
     }
 
 
-    fetchDataNativia();
-
     return (
         <SafeAreaView>
           <View style={styles.homeContainer}>

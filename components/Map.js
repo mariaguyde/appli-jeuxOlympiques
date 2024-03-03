@@ -19,16 +19,13 @@ function Map({navigation}) {
         fetchDataNativia();
     }, []);
 
-    async function getCoordonnesSiteCompetitions() {
-        const { data, error } = await supabase
-        .from('SitesCompetitions')
-        .select('*');
-        setCoordonneesSiteCompetitions(data);
-    }
-
-    function displayItineraireModal () {
-        setIsModalVisible(true);
-    }
+    useEffect(() => {
+        console.log('BAM YANG GANG');
+        if (itineraireEtapes.length != 0) {
+            console.log("itineraire 0 : bam yang gang");
+            console.log(itineraireEtapes[0].mode);
+        }
+    }, [itineraireEtapes]);
 
     async function fetchDataNativia () {
         console.log('fetchData NATIVIA');
@@ -49,14 +46,14 @@ function Map({navigation}) {
               for (let i=0; i<response.data.journeys[0].sections.length; i++) {
                   //console.log(response.data.journeys[0].sections[i]);
                   let boutItineraire = response.data.journeys[0].sections[i]; 
-                  itineraire[i] = {
+                  itineraire.push({
                     mode: boutItineraire.mode, 
                     directionsLiterraire: boutItineraire.path, 
                     pointDepart: boutItineraire.from, 
                     pointArrivee: boutItineraire.to, 
                     departureTime: response.data.journeys[0].departure_date_time,
                     arriveeTime: response.data.journeys[0].arrival_date_time
-                  }
+                  });
   
                   console.log("- " + itineraire[i].pointDepart.name + " - " + itineraire[i].pointArrivee.name );
                   //console.log("- " + convertDate(itineraire[i].pointDepart.departure_date_time) + itineraire[i].pointDepart.name + " - " + itineraire[i].pointArrivee.name );
@@ -64,13 +61,22 @@ function Map({navigation}) {
               console.log("________________________________________________");
               setItineraireEtapes(itineraire);
 
-              console.log('itineraire pho');
-              console.log(itineraireEtapes);
           } catch (err) {
               console.log(err.response);
           }
     }
   
+    async function getCoordonnesSiteCompetitions() {
+        const { data, error } = await supabase
+        .from('SitesCompetitions')
+        .select('*');
+        setCoordonneesSiteCompetitions(data);
+    }
+
+    function displayItineraireModal () {
+        setIsModalVisible(true);
+    }
+
     const convertDate = (chaineDateHeure) => {
   
         // Extraire les composants de la chaîne
@@ -102,7 +108,7 @@ function Map({navigation}) {
         <View style={styles.container}>
             <MapView
                 provider = {PROVIDER_GOOGLE}
-                style={styles.maps}
+                style={{width:Dimensions.get('screen').width, height: 400}}
                 initialRegion={{
                 latitude: 48.864716,
                 longitude: 2.349014,
@@ -123,10 +129,11 @@ function Map({navigation}) {
                  }
             </MapView>
             <Modal style={styles.modalItineraire} isVisible={isModalVisible}>
-                  
-                  <Text>Test Modal</Text>
-                  {/*<Text>{itineraireEtapes[0].mode}</Text>{//*/}
-
+                  {itineraireEtapes[0] && 
+                     itineraireEtapes.map((item, index) => 
+                        <Text>{"- " + item.pointDepart.name + " - " + item.pointArrivee.name }</Text>
+                    )
+                  }
                   <Button title="Hide modal" onPress={handleModal} />
             </Modal>
         </View>
